@@ -24,13 +24,15 @@ class App extends React.Component {
 
     // React *requires* us to define the render() method
     render() {
-        return (
-            <div>
-                Lattitude: {this.state.lat}
-                <br />
-                Error: {this.state.errorMessage}
-            </div>
-        );
+        if (this.state.errorMessage && !this.state.lat) {
+            return <div>Error: {this.state.errorMessage}</div>;
+        };
+
+        if (!this.state.errorMessage && this.state.lat) {
+            return <div>Latitude: {this.state.lat}</div>;
+        };
+        
+        return <div>Loading...</div>;
     };
 };
 
