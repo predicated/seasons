@@ -18,6 +18,13 @@
     color: red;
 }
 
+.season-display h2 {
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    height: 100vh;
+}
+
 .season-display {
     display: flex;
     justify-content: center;

@@ -2,18 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
 import Spinner from './Spinner';
-import Clock from './Clock';
+//import Clock from './Clock';
 
 class App extends React.Component {
     // THIS IS THE ONLY TIME we do direct assignment to state!
     // Any other time you want to change state, use setState()
-    state = { lat: null, errorMessage: '' }
+    state = { lat: null, errorMessage: '', time: new Date().toLocaleTimeString() }
 
     componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
             position => this.setState({ lat: position.coords.latitude }),
             err => this.setState({ errorMessage: err.message })
         );
+        setInterval(() => {
+            this.setState({ time: new Date().toLocaleTimeString() }); 
+        }, 1000);
     };
 
     renderContent() {
@@ -22,7 +25,7 @@ class App extends React.Component {
         };
 
         if (!this.state.errorMessage && this.state.lat) {
-            return <SeasonDisplay lat={this.state.lat} />;
+            return <SeasonDisplay lat={this.state.lat} time={this.state.time} />;
         };
         
         return <Spinner message="Please accept location request" />;

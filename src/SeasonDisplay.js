@@ -28,6 +28,7 @@ const SeasonDisplay = (props) => {
         <div className={`season-display ${season}`}>
             <i className={`icon-left massive ${iconName} icon`} />
             <h1>{text}</h1>
+            <h2>{props.time}</h2>
             <i className={`icon-right massive ${iconName} icon`} />
         </div>
     );
