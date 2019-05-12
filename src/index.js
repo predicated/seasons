@@ -2,13 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-    render() {
-        window.navigator.geolocation.getCurrentPosition(
-            (position) => console.log(position), // Success callback
-            (err) => console.log(err) // Failure callback
-        );
+    constructor(props) {
+        super(props); // Always call this at the start of a constructor
 
-        return <div>Lattitude: </div>;
+        // THIS IS THE ONLY TIME we do direct assignment to this.state
+        // Any other time you want to change state, use setState()
+        this.state = {
+            lat: null,   // Use null whenever you need placeholder for *numerical* value
+            errorMessage: ''
+        };
+
+        window.navigator.geolocation.getCurrentPosition(
+            (position) => {   // Success callback
+                this.setState({ lat: position.coords.latitude });
+            },
+            (err) => {        // Failure callback
+                this.setState({ errorMessage: err.message });
+            }
+        );
+    };
+
+    // React *requires* us to define the render() method
+    render() {
+        return (
+            <div>
+                Lattitude: {this.state.lat}
+                <br />
+                Error: {this.state.errorMessage}
+            </div>
+        );
     };
 };
 
