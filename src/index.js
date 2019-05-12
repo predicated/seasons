@@ -11,14 +11,12 @@ class App extends React.Component {
             lat: null,   // Use null whenever you need placeholder for *numerical* value
             errorMessage: ''
         };
+    };
 
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {   // Success callback
-                this.setState({ lat: position.coords.latitude });
-            },
-            (err) => {        // Failure callback
-                this.setState({ errorMessage: err.message });
-            }
+            position => this.setState({ lat: position.coords.latitude }),
+            err => this.setState({ errorMessage: err.message })
         );
     };
 
