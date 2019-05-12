@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
-import Spinner from './Spinner'; // hurm
+import Spinner from './Spinner';
+import Clock from './Clock';
 
 class App extends React.Component {
     // THIS IS THE ONLY TIME we do direct assignment to state!
@@ -39,5 +40,7 @@ class App extends React.Component {
 
 ReactDOM.render(
     <App />,
+//    <Clock />,
     document.querySelector('#root')
 );
+ 
